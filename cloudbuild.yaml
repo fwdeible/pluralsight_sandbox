@@ -3,7 +3,7 @@ steps:
   - name: 'maven'
     entrypoint: 'mvn'
     dir: 'sandbox'
-    args: ['clean', 'install', '-DskipTests', '-Pprod']
+    args: ['clean', 'install', '-DskipTests']
     #Docker build step to containerize the application
   - name: 'gcr.io/cloud-builders/docker'
     dir: 'sandbox'
