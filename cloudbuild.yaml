@@ -2,14 +2,11 @@ steps:
   #Maven build step to clean and install the project
   - name: 'maven'
     entrypoint: 'mvn'
-    dir: 'sandbox'
     args: ['clean', 'install', '-DskipTests']
     #Docker build step to containerize the application
   - name: 'gcr.io/cloud-builders/docker'
-    dir: 'sandbox'
     script: |
       docker build -t $LOCATION-docker.pkg.dev/$PROJECT_ID/$_REPOSITORY/$_IMAGE:$COMMIT_SHA .
-    automapSubstitutions: true
 
 images: [$LOCATION-docker.pkg.dev/$PROJECT_ID/$_REPOSITORY/$_IMAGE:$COMMIT_SHA]
 
