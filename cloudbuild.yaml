@@ -6,9 +6,9 @@ steps:
     #Docker build step to containerize the application
   - name: 'gcr.io/cloud-builders/docker'
     script: |
-      docker build -t us-central5-docker.pkg.dev/${PROJECT_ID}/sandbox/$_IMAGE:$COMMIT_SHA .
+      docker build -t us.gcr.io/sandbox/$_IMAGE:$COMMIT_SHA .
 
-images: [us-central5-docker.pkg.dev/$PROJECT_ID/sandbox/$_IMAGE:$COMMIT_SHA]
+images: [us.gcr.io/sandbox/$_IMAGE:$COMMIT_SHA]
 
 #logging options for the build process
 options:
