@@ -1,23 +1,18 @@
 steps:
-  # Docker Build
+  #Maven build step to clean and install the project
+  - name: 'maven'
+    entrypoint: 'mvn'
+    dir: 'sandbox'
+    args: ['clean', 'install', '-DskipTests', '-Pprod']
+    #Docker build step to containerize the application
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 
-           'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage', 
-           '.']
+    dir: 'sandbox'
+    script: |
+      docker build -t $LOCATION-docker.pkg.dev/$PROJECT_ID/$_REPOSITORY/$_IMAGE:$COMMIT_SHA .
+    automapSubstitutions: true
 
-  # Docker Push
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 
-           'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage']
+images: [$LOCATION-docker.pkg.dev/$PROJECT_ID/$_REPOSITORY/$_IMAGE:$COMMIT_SHA]
 
-  # Entrypoint, timeout and environment variables
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: 'gcloud'
-    timeout: 240s
-    args: ['compute', 'instances', 
-           'create-with-container', 'my-vm-name',
-           '--container-image', 
-           'us-central1-docker.pkg.dev/${PROJECT_ID}/my-docker-repo/myimage']
-    env:
-      - 'CLOUDSDK_COMPUTE_REGION=us-central1'
-      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+#logging options for the build process
+options:
+  logging: CLOUD_LOGGING_ONLY
