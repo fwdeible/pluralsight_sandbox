@@ -19,7 +19,7 @@ public class SandboxApplication {
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args -> {
 
-			System.out.println("Let's inspect the sandbox beans provided by Spring Boot:");
+			System.out.println("Sandbox beans provided by Spring Boot:");
 
 			String[] beanNames = ctx.getBeanDefinitionNames();
 			Arrays.sort(beanNames);
