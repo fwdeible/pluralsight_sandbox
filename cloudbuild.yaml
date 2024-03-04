@@ -6,10 +6,10 @@ steps:
     #Docker build step to containerize the application
   - name: 'gcr.io/cloud-builders/docker'
     script: |
-      docker build -t us-east5-docker.pkg.dev/$PROJECT_ID/docker-repo/sandbox-0.0.1-SNAPSHOT:$COMMIT_SHA .
+      docker build -t us-east5-docker.pkg.dev/$PROJECT_ID/docker-repo/sandbox-0.0.1:$COMMIT_SHA .
     automapSubstitutions: true
 
-images: [us-east5/sandbox/sandbox-0.0.1-SNAPSHOT:$COMMIT_SHA]
+images: [us-east5/sandbox/sandbox-0.0.1:$COMMIT_SHA]
 
 #logging options for the build process
 options:
