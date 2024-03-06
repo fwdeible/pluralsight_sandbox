@@ -1,24 +1,4 @@
-#steps:
-#  #Maven build step to clean and install the project
-#  - name: 'maven'
-#    entrypoint: 'mvn'
-#    args: ['clean', 'install', '-DskipTests']
-#    #Docker build step to containerize the application
-#  - name: 'gcr.io/cloud-builders/docker'
-#    script: |
-#      docker build -t us-east5-docker.pkg.dev/$PROJECT_ID/docker-repo/sandbox-0.0.1:$COMMIT_SHA .
-#    automapSubstitutions: true
-
-#images: [us-east5-docker.pkg.dev/$PROJECT_ID/docker-repo/sandbox-0.0.1:$COMMIT_SHA]
-
-#logging options for the build process
-#options:
- # logging: CLOUD_LOGGING_ONLY
-  
-  
-  
-  
-  steps:
+steps:
 - name: 'gcr.io/cloud-builders/gcloud'
   script: |
     gcloud run deploy cloudrunservice --image us-east5-docker.pkg.dev/$PROJECT_ID/docker-repo/sandbox-0.0.1:$COMMIT_SHA \
