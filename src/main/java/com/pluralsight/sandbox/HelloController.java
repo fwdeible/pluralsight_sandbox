@@ -21,7 +21,7 @@ public class HelloController {
     @GetMapping("/")
     public String index() {
         System.out.println("Request recieved to root");
-        return "Greetings from Fran's Spring Boot!";
+        return "Greetings from Fran!";
     }
     
     @GetMapping("/test")
